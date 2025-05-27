@@ -2,4 +2,16 @@
 
 moniczka
 
-Bazy: facebook, instagram, youtube, gdziestoja.pl
+Bazy: 
+
+* Uniprot
+* Assebly
+* Nucleotide
+* PDB
+* Protein
+*  Taxonomy
+* pubmed
+* PMC
+* PubChem
+* KEGG
+* String
