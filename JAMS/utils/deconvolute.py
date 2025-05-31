@@ -32,27 +32,3 @@ def deconv(id_list):
             result['unknown'].append(_id)
 
     return result
-
-test_ids = [
-    "P01308",        # UniProt
-    "Q8N158",        # UniProt
-    "1A2B",          # PDB
-    "4HHB",          # PDB
-    "NM_000546",     # Nucleotide
-    "NC_000001.11",  # Nucleotide
-    "XM_123456",     # Nucleotide (RefSeq)
-    "U49845",        # Nucleotide (GenBank)
-    "AY123456.1",    # Nucleotide (GenBank z wersją)
-    "GCF_000001405.39",  # Assembly
-    "GCA_000001635.9",   # Assembly
-    "M12345.1",
-    "XYZ1234",       # ❌ Niepoprawny
-    "123",           # ❌ Za krótki
-    "ABCD5",         # ❌ Nieregularny
-    "NM_ABCDE",      # ❌ Błędny Nucleotide
-]
-
-sorted_ids = deconv(test_ids)
-
-for category, ids in sorted_ids.items():
-    print(f"{category.upper()}: {ids}")
