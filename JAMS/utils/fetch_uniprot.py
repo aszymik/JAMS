@@ -1,5 +1,6 @@
 import os
 import requests
+import time
 
 def get_uniprot(uniprot_id, outdir="uniprot_fasta"):
     """
@@ -22,3 +23,19 @@ def get_uniprot(uniprot_id, outdir="uniprot_fasta"):
         print(f"Saved: {fasta_path}")
     else:
         print(f"Error downloading FASTA for {uniprot_id}: status {response.status_code}")
+
+def get_uniprot_batch(ids, output_dir="uniprot_fasta", delay=0.5):
+    """
+    Download multiple FASTA sequences from UniProt and save them to files.
+
+    Args:
+        ids (list of str): List of UniProt protein IDs to download.
+        output_dir (str): Directory to save the downloaded files.
+        delay (float): Number of seconds to wait after each query.
+
+    Returns:
+        None
+    """
+    for uniprot_id in ids:
+        get_uniprot(uniprot_id, output_dir)
+        time.sleep(delay) 
