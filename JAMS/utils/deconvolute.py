@@ -2,15 +2,17 @@ import re
 
 def deconv(id_list):
     """
-    Rozdziela listę identyfikatorów na listy odpowiadające bazom danych:
+    Splits a list of identifiers into sublists corresponding to different biological databases:
     UniProt, PDB, Nucleotide (GenBank + RefSeq), Assembly
 
     Args:
-        id_list (list of str): Mieszana lista identyfikatorów
+        id_list (list of str): A mixed list of biological identifiers.
 
     Returns:
-        dict: Słownik z kluczami 'uniprot', 'pdb', 'nucleotide', 'assembly', 'unknown'
+        dict: A dictionary with the keys 'uniprot', 'pdb', 'nucleotide', 'assembly', and 'unknown',
+              each containing a list of matching IDs.
     """
+
     result = {
         'uniprot': [],
         'pdb': [],
