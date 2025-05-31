@@ -19,6 +19,6 @@ def get_uniprot(uniprot_id, outdir="uniprot_fasta"):
         fasta_path = os.path.join(outdir, f"{uniprot_id}.fasta")
         with open(fasta_path, "w") as f:
             f.write(response.text)
-        print(f"Zapisano: {fasta_path}")
+        print(f"Saved: {fasta_path}")
     else:
-        print(f"Błąd pobierania FASTA dla {uniprot_id}: status {response.status_code}")
+        print(f"Error downloading FASTA for {uniprot_id}: status {response.status_code}")
