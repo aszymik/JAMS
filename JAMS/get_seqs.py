@@ -54,20 +54,3 @@ def fetch_fasta(id_list: List[str], output_dir: str):
             print(f"❌ Assembly fetch failed for {aid}: {e}")
 
     print("✅ Finished fetching all FASTA sequences.")
-
-if __name__ == "__main__":
-    test_ids = [
-        "P01308",        # UniProt
-        "Q8N158",        # UniProt
-        "1A2B",          # PDB
-        "4HHB",          # PDB
-        "NM_000546",     # Nucleotide (RefSeq)
-        "NC_000001.11",  # Nucleotide (GenBank)
-        "GCF_000001405.39",  # Assembly
-        "GCA_000001635.9",   # Assembly
-        "XYZ1234",       # ❌ Unknown
-        "123",           # ❌ Invalid
-    ]
-
-    output_directory = "fasta_output"
-    fetch_fasta(test_ids, output_directory)
