@@ -2,7 +2,7 @@ import os
 from typing import List
 from pathlib import Path
 from utils.deconvolute import deconv
-from utils.fetch_genome import get_genome
+from utils.fetch_assembly import get_assembly
 from utils.fetch_pdb import get_pdb, get_pdb_batch
 from utils.fetch_uniprot import get_uniprot, get_uniprot_batch
 
@@ -42,14 +42,14 @@ def fetch_fasta(id_list: List[str], output_dir: str):
     nucleotide_ids = categorized_ids.get('nucleotide', [])
     for nid in nucleotide_ids:
         try:
-            get_genome(nid, output_dir)
+            get_assembly(nid, output_dir)
         except Exception as e:
             print(f"❌ Nucleotide fetch failed for {nid}: {e}")
 
     assembly_ids = categorized_ids.get('assembly', [])
     for aid in assembly_ids:
         try:
-            get_genome(aid, output_dir)
+            get_assembly(ids=aid, output_dir=output_dir)
         except Exception as e:
             print(f"❌ Assembly fetch failed for {aid}: {e}")
 
