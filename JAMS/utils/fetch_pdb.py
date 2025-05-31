@@ -1,3 +1,4 @@
+import os
 import requests
 
 def get_pdb(pdb_id, output_dir, file_format='pdb'):
@@ -19,6 +20,7 @@ def get_pdb(pdb_id, output_dir, file_format='pdb'):
     url = f'https://files.rcsb.org/download/{pdb_id.lower()}.{file_format}'
     response = requests.get(url)
     filename = f'{pdb_id.upper()}.{file_format}'
+    os.makedirs(output_dir, exist_ok=True)
 
     if response.status_code == 200:
         with open(f'{output_dir}/{filename}', 'w') as f:
