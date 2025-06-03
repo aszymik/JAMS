@@ -22,4 +22,4 @@ Co musimy zrobić:
 * dodać informację, czy sekwencja jest nukleotydowa czy aminokwasowa - Asia
 * argument czy sekwencje nukleotydowe czy aminokwasowe do funkcji get_genome - Asia
 * przygotować kod jako paczkę - Ania & Asia
-* mapowanie ID - np. z UniProta do PDB
+* mapowanie ID - np. z UniProta do PDB (https://github.com/iriziotis/Uniprot-PDB-mapper)
