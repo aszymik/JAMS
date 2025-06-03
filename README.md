@@ -6,8 +6,9 @@ Bazy:
 * Assebly
 * Nucleotide
 * PDB
+* ESM Atlas
 * Protein
-*  Taxonomy
+* Taxonomy
 * pubmed
 * PMC
 * PubChem
