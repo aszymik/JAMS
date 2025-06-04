@@ -1,19 +1,32 @@
-# JAMS
+# 🧬 JAMS-Fetch
 
-Bazy: 
+**JAMS-Fetch** (_Joint Automated Multi-source Sequence Fetcher_) is a Python package. It automates the retrieval of sequence and structure data from major bioinformatics databases using a unified, user-friendly interface.
 
-* Uniprot
-* Assebly
-* Nucleotide
-* PDB
-* ESM Atlas
-* Protein
-* Taxonomy
-* pubmed
-* PMC
-* PubChem
-* KEGG
-* String
+Supported databases:
+- **NCBI Nucleotide**
+- **NCBI Genome Assembly**
+- **UniProt**
+- **RCSB PDB**
+
+Whether you're working with DNA sequences, protein sequences, or molecular structures, JAMS-Fetch simplifies the download process and saves files in standard formats.
+
+---
+
+## 🚀 Features
+
+- 🧠 Automatically detects the correct source based on ID format.
+- ⚙️ Unified API for batch FASTA sequence downloading.
+- 🔍 Separate functions for advanced, source-specific queries.
+- 💾 Saves sequences and structures in appropriate formats (FASTA, PDB, CIF).
+- 📁 Organizes downloads into user-defined directories.
+
+---
+
+## 📦 Installation
+
+```bash
+pip install jams-fetch
+```
 
 Co musimy zrobić:
 * testowanie - Staszek
