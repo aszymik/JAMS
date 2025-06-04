@@ -28,6 +28,53 @@ Whether you're working with DNA sequences, protein sequences, or molecular struc
 pip install jams-fetch
 ```
 
+---
+
+### 🚀 Quick Start
+
+Use `fetch_fasta()` to automatically download sequences or structure files from multiple sources with a single list of IDs:
+
+```python
+from jamsfetch import fetch_fasta
+
+ids = ["P12345", "NM_001200.2", "1A2B", "GCF_000001405.39"]
+fetch_fasta(
+    id_list=ids,
+    output_dir="downloads/",
+    assembly_data_type="genomic"  # or "protein"
+)
+```
+
+## 🔧 Advanced Usage
+
+Use the following source-specific functions when you need greater control over what and how data is downloaded.
+
+### ⛁ Uniprot
+
+### ⛁ NCBI Nucleotide
+
+### ⛁ NCBI Genome Assembly
+
+Download genomic or protein data for specific organisms or id(s):
+
+```python
+from jamsfetch import get_assembly
+
+get_assembly(
+    organism="Homo sapiens",         # specify an organism name
+    ids=None,                        # or use specific assembly IDs
+    bioproject=None,                 # or BioProject
+    output_dir="genomes/",           # specify output directory
+    data_type="genomic",             # "genomic" or "protein"
+    n=1,                             # if organism was passed, number of genome/proteoms to download
+    unzip=True,                  
+    reference_only=True              # Only reference genomes if True
+)
+```
+
+### ⛁ PDB
+
+---
 Co musimy zrobić:
 * testowanie - Staszek
 * główna funkcja get_structure (póki co wywołuje get_pdb) 
