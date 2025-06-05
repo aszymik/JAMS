@@ -10,7 +10,7 @@ def deconv(id_list):
 
     Returns:
         dict: A dictionary with the keys 'uniprot', 'pdb', 'nucleotide', 'assembly', and 'unknown',
-              each containing a list of matching IDs.
+              each containing a list of matching IDs. Also prints a warning for unrecognized IDs.
     """
 
     result = {
@@ -22,7 +22,7 @@ def deconv(id_list):
     }
 
     for _id in id_list:
-        if re.fullmatch(r"[OPQ][0-9][A-Z0-9]{3}[0-9]", _id) or re.fullmatch(r"[A-NR-Z][0-9]{5}", _id):
+        if re.fullmatch(r"[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}", _id) or re.fullmatch(r"[A-NR-Z][0-9]{5}", _id):
             result['uniprot'].append(_id)
         elif re.fullmatch(r"[A-Za-z0-9]{4}", _id):
             result['pdb'].append(_id)
@@ -32,5 +32,10 @@ def deconv(id_list):
             result['nucleotide'].append(_id)
         else:
             result['unknown'].append(_id)
+
+    if result['unknown']:
+        print("⚠️ Warning: The following identifiers do not match any known format and will not be processed:")
+        for uid in result['unknown']:
+            print(f"  - {uid}")
 
     return result
