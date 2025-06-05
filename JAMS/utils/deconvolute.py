@@ -1,6 +1,6 @@
 import re
 
-def deconv(id_list):
+def deconv(id_list, verbose=True):
     """
     Splits a list of identifiers into sublists corresponding to different biological databases:
     UniProt, PDB, Nucleotide (GenBank + RefSeq), Assembly
@@ -10,7 +10,8 @@ def deconv(id_list):
 
     Returns:
         dict: A dictionary with the keys 'uniprot', 'pdb', 'nucleotide', 'assembly', and 'unknown',
-              each containing a list of matching IDs. Also prints a warning for unrecognized IDs.
+              each containing a list of matching IDs. Also prints a warning for unrecognized IDs
+              and displays sorted identifiers by category.
     """
 
     result = {
@@ -35,7 +36,16 @@ def deconv(id_list):
 
     if result['unknown']:
         print("⚠️ Warning: The following identifiers do not match any known format and will not be processed:")
-        for uid in result['unknown']:
+        for uid in sorted(result['unknown']):
             print(f"  - {uid}")
+            
+    if verbose:
+        print("\n📋 Sorted identifiers by category:")
+        for category, ids in result.items():
+            if category != "unknown":
+                print(f"\n{category.capitalize()} ({len(ids)}):")
+                for uid in sorted(ids):
+                    print(f"  - {uid}")
 
     return result
+
