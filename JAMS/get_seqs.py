@@ -68,6 +68,6 @@ def fetch_fasta(id_list: List[str],
 
 # Example run
 # fetch_fasta(id_list = ['F1LXF1', 'P11274', 'GCF_049306965.1', 'GCA_000195955.2'],
-#             output_dir = "data",
-#             assembly_data_type="genomic", # genomic, or protein
-#             )
+#            output_dir = "data",
+#            assembly_data_type="genomic", # genomic, or protein
+#            )
