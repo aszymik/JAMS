@@ -64,3 +64,32 @@ def fetch_fasta(id_list: List[str],
             print(f"❌ Assembly fetch failed for {aid}: {e}")
 
     print("✅ Finished fetching all FASTA sequences.")
+
+
+def fetch_struct(id_list: List[str], output_dir: str):
+    """
+    Fetches PDB structures only, from a mixed list of IDs.
+
+    Args:
+        id_list (List[str]): List of identifiers (can be mixed types).
+        output_dir (str): Path to the output directory for PDB files.
+    """
+    os.makedirs(output_dir, exist_ok=True)
+    categorized_ids = deconv(id_list)
+    pdb_ids = categorized_ids.get('pdb', [])
+
+    if not pdb_ids:
+        print("ℹ️ No valid PDB IDs found.")
+        return
+
+    print(f"➡️ Downloading PDB structures for: {' '.join(pdb_ids)}")
+    try:
+        if download_pdb_files:
+            download_pdb_files(pdb_ids, output_dir)
+        else:
+            for pid in pdb_ids:
+                get_pdb(pid, output_dir)
+    except Exception as e:
+        print(f"❌ PDB fetch failed: {e}")
+
+    print("✅ Finished downloading PDB structures.")
