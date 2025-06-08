@@ -25,7 +25,7 @@ Whether you're working with DNA sequences, protein sequences, or molecular struc
 ## 📦 Installation
 
 ```bash
-pip install jams-fetch
+pip install jamsfetch
 ```
 
 ---
@@ -58,7 +58,7 @@ Use the following source-specific functions when you need greater control over w
 Download genomic or protein data for specific organisms or id(s):
 
 ```python
-from jamsfetch import get_assembly
+from jamsfetch.utils import get_assembly
 
 get_assembly(
     organism="Homo sapiens",         # specify an organism name
