@@ -366,3 +366,6 @@ pip-selfcheck.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,macos,venv,linux
+
+# Custom
+test_dir/
