@@ -25,7 +25,7 @@ Whether you're working with DNA sequences, protein sequences, or molecular struc
 ## 📦 Installation
 
 ```bash
-pip install jams-fetch
+pip install jamsfetch
 ```
 
 ---
@@ -58,7 +58,7 @@ Use the following source-specific functions when you need greater control over w
 Download genomic or protein data for specific organisms or id(s):
 
 ```python
-from jamsfetch import get_assembly
+from jamsfetch.utils import get_assembly
 
 get_assembly(
     organism="Homo sapiens",         # specify an organism name
@@ -75,11 +75,6 @@ get_assembly(
 ### ⛁ PDB
 
 ---
-Co musimy zrobić:
-* testowanie - Staszek
-* ✅ główna funkcja get_structure (póki co wywołuje get_pdb) 
-* ✅  dodać warning przy złym id - Michał
-* ✅ dodać informację, czy sekwencja jest nukleotydowa czy aminokwasowa - Asia (nie dodawałam do pdb, bo ten fragment będzie przenoszony do innej funkcji)
-* ✅ argument czy sekwencje nukleotydowe czy aminokwasowe do funkcji get_genome - Asia
-* przygotować kod jako paczkę - Ania & Asia
-* mapowanie ID - np. z UniProta do PDB (https://github.com/iriziotis/Uniprot-PDB-mapper)
+Upcoming capabilities:
+* Testing - Staszek
+* UniProta to PDB mapping (https://github.com/iriziotis/Uniprot-PDB-mapper)
