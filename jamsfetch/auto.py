@@ -1,15 +1,14 @@
 import os
 from typing import List
-from pathlib import Path
-from utils.deconvolute import deconv
-from utils.fetch_assembly import get_assembly
-from utils.fetch_pdb import get_pdb, download_pdb_files
-from utils.fetch_uniprot import get_uniprot, get_uniprot_batch
+from .utils.deconvolute import deconv
+from .utils.fetch_assembly import get_assembly
+from .utils.fetch_pdb import get_pdb, download_pdb_files
+from .utils.fetch_uniprot import get_uniprot, get_uniprot_batch
 
 def fetch_fasta(id_list: List[str],
                 output_dir: str,
                 assembly_data_type:str="genomic",
-                ):
+                ) -> None:
     """
     Main function that fetches FASTA sequences for a given list of IDs from various databases.
 
@@ -65,9 +64,3 @@ def fetch_fasta(id_list: List[str],
             print(f"❌ Assembly fetch failed for {aid}: {e}")
 
     print("✅ Finished fetching all FASTA sequences.")
-
-# Example run
-# fetch_fasta(id_list = ['F1LXF1', 'P11274', 'GCF_049306965.1', 'GCA_000195955.2'],
-#             output_dir = "data",
-#             assembly_data_type="genomic", # genomic, or protein
-#             )

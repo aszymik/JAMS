@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jamsfetch"
+version = "0.1.0"
+description = "JAMS-Fetch (Joint Automated Multi-source Sequence Fetcher) is a Python package. It automates the retrieval of sequence and structure data from major bioinformatics databases using a unified, user-friendly interface."
+authors = [
+    {name = "Anna Szymik"},
+    {name = "Michal Stanowski"},
+    {name = "Stanislaw Golebiewski"},
+    {name = "Joanna Dabrowska"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+    "requests>=2.25"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/aszymik/JAMS"
