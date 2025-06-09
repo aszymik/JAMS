@@ -4,6 +4,7 @@ from .utils.deconvolute import deconv
 from .utils.fetch_assembly import get_assembly
 from .utils.fetch_pdb import get_pdb, _map_uniprot_to_pdb
 from .utils.fetch_uniprot import get_uniprot, get_uniprot_batch
+from .utils.fetch_alphafold import get_alphafold
 
 def fetch_fasta(id_list: List[str],
                 output_dir: str,
@@ -62,32 +63,54 @@ def fetch_fasta(id_list: List[str],
 def fetch_structure(id_list: List[str], 
                     output_dir: str,
                     file_format: str = "pdb",
+                    source: str = "pdb",
                     ) -> None:
     """
-    Fetches PDB structures using mixed list of PDB or UniProt IDs.
+    Fetches protein structures using mixed list of PDB or UniProt IDs from 
+    PDB (experimentally verified structures) or AlphaFold DB (predicted 
+    structures).
 
     Args:
         id_list (List[str]): List of PDB or UniProt identifiers.
         output_dir (str): Directory to store fetched structures.
         file_format (str): Format of the structure file ('pdb' or 'cif'). Default is 'pdb'.
+        source (str): Source to get structures from ('pdb' or 'alphafold'/'af'). 
     """
     os.makedirs(output_dir, exist_ok=True)
     categorized_ids = deconv(id_list)
     pdb_ids = set(categorized_ids.get('pdb', []))
-
-    # Map UniProt → PDB
     uniprot_ids = categorized_ids.get('uniprot', [])
-    for uid in uniprot_ids:
-        pdb_ids.update(_map_uniprot_to_pdb(uid))
 
-    if not pdb_ids:
-        print("ℹ️ No valid PDB IDs (direct or via UniProt) found.")
-        return
+    if source.lower() == "pdb":
+        # Map UniProt to PDB
+        for uid in uniprot_ids:
+            pdb_ids.update(_map_uniprot_to_pdb(uid))
 
-    print(f"➡️ Downloading PDB structures for: {' '.join(sorted(pdb_ids))}")
-    try:
-        get_pdb(sorted(pdb_ids), output_dir, file_format)
-    except Exception as e:
-        print(f"❌ PDB fetch failed: {e}")
+        if not pdb_ids:
+            print("ℹ️ No valid PDB IDs (direct or via UniProt) found.")
+            return
 
-    print("✅ Finished downloading PDB structures.")
+        print(f"➡️ Downloading PDB structures for: {' '.join(sorted(pdb_ids))}")
+        try:
+            get_pdb(sorted(pdb_ids), output_dir, file_format)
+        except Exception as e:
+            print(f"❌ PDB fetch failed: {e}")
+
+        print("✅ Finished downloading PDB structures.")
+    
+    elif source.lower() == "alphafold" or source.lower() == "af":
+        if pdb_ids:
+            print(f"ℹ️ {' '.join(pdb_ids)} are PDB IDs and the chosen source is AlphaFold. If you want to download these structures, specify 'pdb' as source.")
+
+        if not uniprot_ids:
+            print("ℹ️ No valid UniProt IDs found.")
+            return
+        
+        for uid in uniprot_ids:
+            try:
+                get_alphafold(uniprot_ids, output_dir, file_format)
+            except Exception as e:
+                print(f"❌ AlphaFold fetch failed: {e}")
+
+    else:
+        print(f"❌ Invalid source. Accepted values are pdb and alphafold (af)")
