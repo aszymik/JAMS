@@ -7,7 +7,7 @@ from .utils.fetch_uniprot import get_uniprot, get_uniprot_batch
 
 def fetch_fasta(id_list: List[str],
                 output_dir: str,
-                assembly_data_type:str="genomic",
+                assembly_data_type: str = "genomic",
                 ) -> None:
     """
     Main function that fetches FASTA sequences for a given list of IDs from various databases.
@@ -59,7 +59,10 @@ def fetch_fasta(id_list: List[str],
     print("✅ Finished fetching all FASTA sequences.")
 
 
-def fetch_structure(id_list: List[str], output_dir: str):
+def fetch_structure(id_list: List[str], 
+                    output_dir: str,
+                    file_format: str = "pdb",
+                    ) -> None:
     """
     Fetches PDB structures using mixed list of PDB or UniProt IDs.
 
@@ -82,7 +85,7 @@ def fetch_structure(id_list: List[str], output_dir: str):
 
     print(f"➡️ Downloading PDB structures for: {' '.join(sorted(pdb_ids))}")
     try:
-        get_pdb(sorted(pdb_ids), output_dir)
+        get_pdb(sorted(pdb_ids), output_dir, file_format)
     except Exception as e:
         print(f"❌ PDB fetch failed: {e}")
 
