@@ -55,3 +55,21 @@ def get_pdb(
             print(f"Failed to download {url}: {e}")
         except Exception as e:
             print(f"Unexpected error with ID '{pdb_id.upper()}': {e}")
+
+def _map_uniprot_to_pdb(uniprot_id):
+    """
+    Maps a UniProt ID to associated PDB IDs using UniProt API.
+
+    Returns a list of associated PDB IDs (can be empty).
+    """
+    url = f"https://rest.uniprot.org/uniprotkb/{uniprot_id}.json"
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
+        xrefs = data.get('uniProtKBCrossReferences', [])
+        pdb_ids = [x['id'].lower() for x in xrefs if x['database'] == 'PDB']
+        return pdb_ids
+    except Exception as e:
+        print(f"❌ Failed to map UniProt ID {uniprot_id} to PDB: {e}")
+        return []
