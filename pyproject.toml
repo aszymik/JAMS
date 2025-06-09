@@ -15,7 +15,8 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.6"
 dependencies = [
-    "requests>=2.25"
+    "requests>=2.25",
+    "biopython",
 ]
 dynamic = ["version"]
 
