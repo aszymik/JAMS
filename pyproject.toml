@@ -1,10 +1,9 @@
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools>=42", "wheel", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "jamsfetch"
-version = "1.0.2"
 description = "JAMS-Fetch (Joint Automated Multi-source Sequence Fetcher) is a Python package. It automates the retrieval of sequence and structure data from major bioinformatics databases using a unified, user-friendly interface."
 authors = [
     {name = "Anna Szymik"},
@@ -21,3 +20,7 @@ dependencies = [
 
 [project.urls]
 "Homepage" = "https://github.com/aszymik/JAMS"
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"
