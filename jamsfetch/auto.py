@@ -43,7 +43,7 @@ def fetch_fasta(id_list: List[str],
         
     for nid in nucleotide_ids:
         try:
-            get_nucleotide(nid, output_dir)
+            get_nucleotide(record_ids=nid, output_dir=output_dir)
         except Exception as e:
             print(f"❌ Nucleotide fetch failed for {nid}: {e}")
 
