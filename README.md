@@ -107,7 +107,7 @@ Download predicted protein structures:
 from jamsfetch.utils import get_alphafold
 
 get_alphafold(
-    uniprot_ids=['1TUP', '9E2J'],       # specify a single ID or a list of IDs
+    uniprot_ids='P12345',           # specify a single ID or a list of IDs
     output_dir="structures/",       # specify output directory
     file_format="pdb",              # or "cif"
 )
