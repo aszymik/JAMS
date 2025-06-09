@@ -69,6 +69,7 @@ def fetch_structure(id_list: List[str],
     Args:
         id_list (List[str]): List of PDB or UniProt identifiers.
         output_dir (str): Directory to store fetched structures.
+        file_format (str): Format of the structure file ('pdb' or 'cif'). Default is 'pdb'.
     """
     os.makedirs(output_dir, exist_ok=True)
     categorized_ids = deconv(id_list)
