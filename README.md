@@ -7,6 +7,7 @@ Supported databases:
 - **NCBI Genome Assembly**
 - **UniProt**
 - **RCSB PDB**
+- **AlphaFold DB**
 
 Whether you're working with DNA sequences, protein sequences, or molecular structures, JAMS-Fetch simplifies the download process and saves files in standard formats.
 
@@ -44,7 +45,7 @@ fetch_fasta(
     assembly_data_type="genomic"  # or "protein"
 )
 ```
-To download 3D protein structures in PDB or CIF format from UniProt or PDB IDs, either from PDB or AlphaFold DB, use `fetch_structure()`:
+To download 3D protein structures from UniProt or PDB IDs, either from PDB or AlphaFold DB, use `fetch_structure()`:
 ```python
 from jamsfetch import fetch_structure
 
@@ -52,8 +53,8 @@ ids = ["P12345", "1A2B"]
 fetch_structure(
     id_list=ids,
     output_dir="downloads/",
-    file_format="pdb"         # or "cif",
-    source="pdb"              # or "af"
+    file_format="pdb",          # or "cif"
+    source="pdb"                # or "af"
 )
 ```
 
@@ -107,7 +108,7 @@ Download predicted protein structures:
 from jamsfetch.utils import get_alphafold
 
 get_alphafold(
-    uniprot_ids=['1TUP', '9E2J'],       # specify a single ID or a list of IDs
+    uniprot_ids='P12345',           # specify a single ID or a list of IDs
     output_dir="structures/",       # specify output directory
     file_format="pdb",              # or "cif"
 )

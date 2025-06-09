@@ -1,55 +1,34 @@
 import os
 import requests
-from typing import List
+from typing import Union, List
 
 def get_nucleotide(
-    record_id: str,
+    record_ids: Union[str, List[str]],
     email: str,
     rettype: str = "fasta",
     retmode: str = "text",
     output_dir: str = "."
 ) -> str:
     """
-    Download a single nucleotide record from NCBI E-utilities and save to file.
+    Fetch nucleotide sequence(s) from NCBI and save to file.
 
     Args:
-        record_id: Accession (e.g. 'NM_001200.2')
+        record_ids: Accession or list of accessions (e.g. 'NM_001200.2' or ['NM_001200.2', 'NM_000546.6'])
         email: Email address required by NCBI
-        rettype: Format (e.g. 'fasta', 'gb', 'gbwithparts')
+        rettype: Format ('fasta', 'gb', etc.)
         retmode: Mode ('text' or 'xml')
-        output_dir: Directory for saving the file
+        output_dir: Output directory
 
     Returns:
         Path to the saved file
     """
-    return get_nucleotide_batch([record_id], email, rettype, retmode, output_dir)
+    if isinstance(record_ids, str):
+        record_ids = [record_ids]
 
-
-def get_nucleotide_batch(
-    record_ids: List[str],
-    email: str,
-    rettype: str = "fasta",
-    retmode: str = "text",
-    output_dir: str = "."
-) -> str:
-    """
-    Download multiple nucleotide records from NCBI E-utilities and save to a single file.
-
-    Args:
-        record_ids: List of accessions (e.g. ['NM_001200.2', 'NM_000546.6'])
-        email: Email address required by NCBI
-        rettype: Format (e.g. 'fasta', 'gb', 'gbwithparts')
-        retmode: Mode ('text' or 'xml')
-        output_dir: Directory for saving the file
-
-    Returns:
-        Path to the saved file
-    """
     url = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
-    ids_str = ",".join(record_ids)
     params = {
         "db": "nucleotide",
-        "id": ids_str,
+        "id": ",".join(record_ids),
         "rettype": rettype,
         "retmode": retmode,
         "email": email
@@ -59,7 +38,7 @@ def get_nucleotide_batch(
     r.raise_for_status()
 
     os.makedirs(output_dir, exist_ok=True)
-    ext = "fasta" if rettype == "fasta" else "gb"
+    ext = "fasta" if rettype == "fasta" else rettype
     filename = f"{'_'.join(record_ids)[:100]}.{ext}"
     out_path = os.path.join(output_dir, filename)
 
