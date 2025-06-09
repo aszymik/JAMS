@@ -7,12 +7,9 @@ def get_esm(esm_ids, output_dir="structures/", file_format="pdb"):
     Downloads predicted protein structure for a given ESM Atlas ID (e.g., MGYP000740062793).
 
     Args:
-        esm_id (str): ESM Atlas identifier (must start with 'MGYP').
+        esm_ids (str or list): ESM Atlas ID or list of ESM Atlas IDs (must start with 'MGYP').
         output_dir (str): Directory to save the downloaded .pdb files.
         file_format (str): Desired output file_format: 'pdb' or 'cif'.
-
-    Returns:
-        str: Path to the downloaded PDB file, or None if failed.
     """
     if isinstance(esm_ids, str):
         esm_ids = [esm_ids]
