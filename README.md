@@ -84,6 +84,19 @@ get_assembly(
 
 ### ⛁ PDB
 
+Download desired protein structures:
+
+```python
+from jamsfetch.utils import get_pdb
+
+get_pdb(
+    pdb_ids=['1TUP', '9E2J'],       # specify a single ID or a list of IDs
+    output_dir="structures/",       # specify output directory
+    file_format="pdb",              # or "cif"
+    unzip=True                      # whether to unzip or leave .gz files
+)
+```
+
 ---
 Upcoming capabilities:
 * Testing - Staszek
