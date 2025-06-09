@@ -8,6 +8,7 @@ Supported databases:
 - **UniProt**
 - **RCSB PDB**
 - **AlphaFold DB**
+- **ESM Metagenomic Atlas**
 
 Whether you're working with DNA sequences, protein sequences, or molecular structures, JAMS-Fetch simplifies the download process and saves files in standard formats.
 
@@ -45,16 +46,16 @@ fetch_fasta(
     assembly_data_type="genomic"  # or "protein"
 )
 ```
-To download 3D protein structures from UniProt or PDB IDs, either from PDB or AlphaFold DB, use `fetch_structure()`:
+To download 3D protein structures, either experimentally determined or predicted, use `fetch_structure()`:
 ```python
 from jamsfetch import fetch_structure
 
-ids = ["P12345", "1A2B"]
+ids = ["P12345", "1A2B"]       # UniProt, PDB and ESM IDs are accepted
 fetch_structure(
     id_list=ids,
     output_dir="downloads/",
     file_format="pdb",          # or "cif"
-    source="pdb"                # or "af"
+    source="experimental"       # or "predicted"
 )
 ```
 
@@ -102,13 +103,26 @@ get_pdb(
 
 ### ⛁ AlphaFold DB
 
-Download predicted protein structures:
+Download AlphaFold-predicted protein structures:
 
 ```python
 from jamsfetch.utils import get_alphafold
 
 get_alphafold(
     uniprot_ids='P12345',           # specify a single ID or a list of IDs
+    output_dir="structures/",       # specify output directory
+    file_format="pdb",              # or "cif"
+)
+```
+
+### ⛁ ESM Metagenomic Atlas
+
+Download ESMFold-predicted protein structures:
+```python
+from jamsfetch.utils import get_esm
+
+get_esm(
+    esm_ids='MGYP000740062793',     # specify a single ID or a list of IDs
     output_dir="structures/",       # specify output directory
     file_format="pdb",              # or "cif"
 )
