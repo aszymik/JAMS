@@ -45,7 +45,7 @@ fetch_fasta(
     assembly_data_type="genomic"  # or "protein"
 )
 ```
-To download 3D protein structures in PDB or CIF format from UniProt or PDB IDs, either from PDB or AlphaFold DB, use `fetch_structure()`:
+To download 3D protein structures from UniProt or PDB IDs, either from PDB or AlphaFold DB, use `fetch_structure()`:
 ```python
 from jamsfetch import fetch_structure
 
