@@ -7,6 +7,7 @@ Supported databases:
 - **NCBI Genome Assembly**
 - **UniProt**
 - **RCSB PDB**
+- **AlphaFold DB**
 
 Whether you're working with DNA sequences, protein sequences, or molecular structures, JAMS-Fetch simplifies the download process and saves files in standard formats.
 
