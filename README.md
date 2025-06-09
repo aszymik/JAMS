@@ -151,5 +151,3 @@ get_esm(
 ```
 
 ---
-Upcoming capabilities:
-* Testing - Staszek
