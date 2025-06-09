@@ -25,7 +25,6 @@ def get_alphafold(uniprot_ids, output_dir="structures/", file_format="pdb"):
         uniprot_ids = [uniprot_ids]
 
     os.makedirs(output_dir, exist_ok=True)
-    results = []
 
     for uniprot_id in uniprot_ids:
         pdb_url = f"https://alphafold.ebi.ac.uk/files/AF-{uniprot_id}-F1-model_v4.pdb"

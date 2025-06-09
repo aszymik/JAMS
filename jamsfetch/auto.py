@@ -3,7 +3,7 @@ from typing import List
 from .utils.deconvolute import deconv
 from .utils.fetch_assembly import get_assembly
 from .utils.fetch_pdb import get_pdb, _map_uniprot_to_pdb
-from .utils.fetch_uniprot import get_uniprot, get_uniprot_batch
+from .utils.fetch_uniprot import get_uniprot
 from .utils.fetch_nucleotide import get_nucleotide
 from .utils.fetch_alphafold import get_alphafold
 from .utils.fetch_esm import get_esm
@@ -29,11 +29,7 @@ def fetch_fasta(id_list: List[str],
     if uniprot_ids:
         print(f"➡️ Downloading amino acid seuqences from Uniprot for: {' '.join(uniprot_ids)}")
         try:
-            if get_uniprot_batch:
-                get_uniprot_batch(uniprot_ids, output_dir)
-            else:
-                for uid in uniprot_ids:
-                    get_uniprot(uid, output_dir)
+            get_uniprot(uniprot_ids, output_dir)
         except Exception as e:
             print(f"❌ UniProt fetch failed: {e}")
 
