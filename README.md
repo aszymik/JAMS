@@ -50,7 +50,7 @@ To download 3D protein structures, either experimentally determined or predicted
 ```python
 from jamsfetch import fetch_structure
 
-ids = ["P12345", "1A2B"]       # UniProt, PDB and ESM IDs are accepted
+ids = ["Q8WXF3", "1A2B"]       # UniProt, PDB and ESM IDs are accepted
 fetch_structure(
     id_list=ids,
     output_dir="downloads/",
