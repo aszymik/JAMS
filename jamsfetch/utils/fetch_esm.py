@@ -1,6 +1,6 @@
 import os
 import requests
-from fetch_alphafold import _pdb_to_cif
+from .fetch_alphafold import _pdb_to_cif
 
 def get_esm(esm_ids, output_dir="structures/", file_format="pdb"):
     """
