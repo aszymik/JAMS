@@ -100,4 +100,3 @@ get_pdb(
 ---
 Upcoming capabilities:
 * Testing - Staszek
-* UniProta to PDB mapping (https://github.com/iriziotis/Uniprot-PDB-mapper)
