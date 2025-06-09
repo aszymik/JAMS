@@ -15,14 +15,22 @@ def get_uniprot(uniprot_ids, outdir="uniprot_fasta"):
     if isinstance(uniprot_ids, str):
         uniprot_ids = [uniprot_ids]
 
-    for uniprot_id in uniprot_ids:    
-        fasta_url = f"{base_url}{uniprot_id}.fasta"
-        response = requests.get(fasta_url)
 
-        if response.status_code == 200:
+    for uniprot_id in uniprot_ids:
+        fasta_url = f"{base_url}{uniprot_id}.fasta"
+
+        try:
+            response = requests.get(fasta_url, timeout=10)
+            response.raise_for_status()  # raise HTTPError for bad responses
+
             fasta_path = os.path.join(outdir, f"{uniprot_id}.fasta")
             with open(fasta_path, "w") as f:
                 f.write(response.text)
             print(f"Saved: {fasta_path}")
-        else:
-            print(f"Error downloading FASTA for {uniprot_id}: status {response.status_code}")
+
+        except requests.exceptions.HTTPError:
+            print(f"Could not download FASTA for {uniprot_id}: issue on the database side, please check the ID or try again later.")
+        except requests.exceptions.RequestException:
+            print(f"Network issue occurred while downloading {uniprot_id}, please try again later.")
+        except Exception:
+            print(f"An unexpected error occurred for {uniprot_id}, please try again later.")
