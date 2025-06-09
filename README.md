@@ -37,8 +37,19 @@ Use `fetch_fasta()` to automatically download sequences or structure files from 
 ```python
 from jamsfetch import fetch_fasta
 
-ids = ["P12345", "NM_001200.2", "1A2B", "GCF_000001405.39"]
+ids = ["P12345", "NM_001200.2", "GCF_000001405.39"]
 fetch_fasta(
+    id_list=ids,
+    output_dir="downloads/",
+    assembly_data_type="genomic"  # or "protein"
+)
+```
+To download 3D protein structures in PDB or CIF format from UniProt or PDB IDs, use `fetch_structure()`:
+```python
+from jamsfetch import fetch_structure
+
+ids = ["P12345", "1A2B"]
+fetch_structure(
     id_list=ids,
     output_dir="downloads/",
     assembly_data_type="genomic"  # or "protein"
