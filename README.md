@@ -53,8 +53,8 @@ ids = ["P12345", "1A2B"]
 fetch_structure(
     id_list=ids,
     output_dir="downloads/",
-    file_format="pdb"         # or "cif",
-    source="pdb"              # or "af"
+    file_format="pdb",          # or "cif"
+    source="pdb"                # or "af"
 )
 ```
 
