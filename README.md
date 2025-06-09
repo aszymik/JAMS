@@ -149,7 +149,7 @@ get_esm(
     file_format="pdb",              # or "cif"
 )
 ```
-
+---
 ## 🧪 Tests
 
 Optional tests are available in the `tests/` directory. To run them:
