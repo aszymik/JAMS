@@ -150,4 +150,13 @@ get_esm(
 )
 ```
 
----
+## 🧪 Tests
+
+Optional tests are available in the `tests/` directory. To run them:
+
+```bash
+pip install .[test]
+pytest
+```
+
+This will run a series of integration tests for all supported sources. Invalid IDs are also tested to ensure proper error handling.
