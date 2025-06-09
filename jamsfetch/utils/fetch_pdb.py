@@ -29,6 +29,7 @@ def get_pdb(
     os.makedirs(output_dir, exist_ok=True)
 
     for pdb_id in pdb_ids:
+        pdb_id = pdb_id.upper()
         gz_filename = f"{pdb_id}.{file_format}.gz"
         url = f"{base_url}/{gz_filename}"
         gz_path = os.path.join(output_dir, gz_filename)
@@ -68,7 +69,7 @@ def _map_uniprot_to_pdb(uniprot_id):
         response.raise_for_status()
         data = response.json()
         xrefs = data.get('uniProtKBCrossReferences', [])
-        pdb_ids = [x['id'].lower() for x in xrefs if x['database'] == 'PDB']
+        pdb_ids = [x['id'].upper() for x in xrefs if x['database'] == 'PDB']
         return pdb_ids
     except Exception as e:
         print(f"❌ Failed to map UniProt ID {uniprot_id} to PDB: {e}")

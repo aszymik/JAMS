@@ -27,7 +27,7 @@ def fetch_fasta(id_list: List[str],
 
     uniprot_ids = categorized_ids.get('uniprot', [])
     if uniprot_ids:
-        print(f"➡️ Downloading amino acid seuqences from Uniprot for: {' '.join(uniprot_ids)}")
+        print(f"➡️ Downloading amino acid seuqences from Uniprot for: {', '.join(uniprot_ids)}")
         try:
             get_uniprot(uniprot_ids, output_dir)
         except Exception as e:
@@ -35,11 +35,11 @@ def fetch_fasta(id_list: List[str],
 
     pdb_ids = categorized_ids.get('pdb', [])
     if pdb_ids:
-        print(f"❌ The following IDs are PDB IDs: {''.join(pdb_ids)}. Please use fetch_structure function to download structures.")
+        print(f"❌ The following IDs are PDB IDs: {', '.join(pdb_ids)}. Please use fetch_structure function to download structures.")
 
     nucleotide_ids = categorized_ids.get('nucleotide', [])
     if nucleotide_ids:
-        print(f"➡️ Downloading nucleotide sequences from NCBI:nucleotide for: {' '.join(nucleotide_ids)}")
+        print(f"➡️ Downloading nucleotide sequences from NCBI:nucleotide for: {', '.join(nucleotide_ids)}")
         
     for nid in nucleotide_ids:
         try:
@@ -49,7 +49,7 @@ def fetch_fasta(id_list: List[str],
 
     assembly_ids = categorized_ids.get('assembly', [])
     if assembly_ids: 
-        print(f"➡️ Downloading {'proteom(s)' if assembly_data_type == 'protein(s)' else 'genome'} from Genome Assembly for: {' '.join(assembly_ids)}")
+        print(f"➡️ Downloading {'proteom(s)' if assembly_data_type == 'protein(s)' else 'genome'} from Genome Assembly for: {', '.join(assembly_ids)}")
     for aid in assembly_ids:
         try:
             get_assembly(ids=aid, output_dir=output_dir, data_type=assembly_data_type)
@@ -84,7 +84,7 @@ def fetch_structure(id_list: List[str],
 
     if source.lower() == "experimental" or source.lower() == "exp":
         if esm_ids:
-            print(f"ℹ️ {' '.join(esm_ids)} are ESM predicted structures and the chosen source is 'experimental'. If you want to download these structures, specify 'predicted' as source.")
+            print(f"ℹ️ {', '.join(esm_ids)} are ESM predicted structures and the chosen source is 'experimental'. If you want to download these structures, specify 'predicted' as source.")
 
         # Map UniProt to PDB
         for uid in uniprot_ids:
@@ -94,7 +94,7 @@ def fetch_structure(id_list: List[str],
             print("ℹ️ No valid PDB IDs (direct or via UniProt) found.")
             return
 
-        print(f"➡️ Downloading PDB structures for: {' '.join(sorted(pdb_ids))}")
+        print(f"➡️ Downloading PDB structures for: {', '.join(sorted(pdb_ids))}")
         try:
             get_pdb(sorted(pdb_ids), output_dir, file_format)
         except Exception as e:
@@ -104,7 +104,7 @@ def fetch_structure(id_list: List[str],
     
     elif source.lower() == "predicted" or source.lower() == "pred":
         if pdb_ids:
-            print(f"ℹ️ {' '.join(pdb_ids)} are PDB experimental structures and the chosen source is 'predicted'. If you want to download these structures, specify 'experimental' as source.")
+            print(f"ℹ️ {', '.join(pdb_ids)} are PDB experimental structures and the chosen source is 'predicted'. If you want to download these structures, specify 'experimental' as source.")
 
         if not uniprot_ids and not esm_ids:
             print("ℹ️ No valid UniProt and ESM IDs found.")
