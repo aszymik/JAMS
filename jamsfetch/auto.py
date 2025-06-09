@@ -24,7 +24,7 @@ def fetch_fasta(id_list: List[str],
 
     uniprot_ids = categorized_ids.get('uniprot', [])
     if uniprot_ids:
-        print(f"➡️ Downloading amino acid seuqences from Uniprot for: {" ".join(uniprot_ids)}")
+        print(f"➡️ Downloading amino acid seuqences from Uniprot for: {' '.join(uniprot_ids)}")
         try:
             if get_uniprot_batch:
                 get_uniprot_batch(uniprot_ids, output_dir)
@@ -47,7 +47,7 @@ def fetch_fasta(id_list: List[str],
 
     nucleotide_ids = categorized_ids.get('nucleotide', [])
     if nucleotide_ids:
-        print(f"➡️ Downloading nucleotide sequences from NCBI:nucleotide for: {" ".join(nucleotide_ids)}")
+        print(f"➡️ Downloading nucleotide sequences from NCBI:nucleotide for: {' '.join(nucleotide_ids)}")
     for nid in nucleotide_ids:
         try:
             get_assembly(nid, output_dir)
@@ -56,7 +56,7 @@ def fetch_fasta(id_list: List[str],
 
     assembly_ids = categorized_ids.get('assembly', [])
     if assembly_ids: 
-        print(f"➡️ Downloading {'proteom(s)' if assembly_data_type == "protein(s)" else "genome"} from Genome Assembly for: {" ".join(assembly_ids)}")
+        print(f"➡️ Downloading {'proteom(s)' if assembly_data_type == 'protein(s)' else 'genome'} from Genome Assembly for: {' '.join(assembly_ids)}")
     for aid in assembly_ids:
         try:
             get_assembly(ids=aid, output_dir=output_dir, data_type=assembly_data_type)
