@@ -65,6 +65,13 @@ Use the following source-specific functions when you need greater control over w
 
 ### ⛁ Uniprot
 
+Download the original FASTA file(s) from UniProt:
+
+get_uniprot(
+    uniprot_ids='P12345',           # specify a single UniProt ID or a list of IDs
+    outdir="uniprot_fasta",         # specify output directory for FASTA files
+)
+
 ### ⛁ NCBI Nucleotide
 
 ### ⛁ NCBI Genome Assembly
