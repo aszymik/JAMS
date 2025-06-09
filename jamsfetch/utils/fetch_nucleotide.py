@@ -4,10 +4,10 @@ from typing import Union, List
 
 def get_nucleotide(
     record_ids: Union[str, List[str]],
+    output_dir: str = ".",
     email: str = "",
     rettype: str = "fasta",
     retmode: str = "text",
-    output_dir: str = "."
 ) -> str:
     """
     Fetch nucleotide sequence(s) from NCBI and save to file.
