@@ -2,7 +2,7 @@ import os
 from typing import List
 from .utils.deconvolute import deconv
 from .utils.fetch_assembly import get_assembly
-from .utils.fetch_pdb import get_pdb, download_pdb_files
+from .utils.fetch_pdb import get_pdb, _map_uniprot_to_pdb
 from .utils.fetch_uniprot import get_uniprot, get_uniprot_batch
 
 def fetch_fasta(id_list: List[str],
@@ -36,14 +36,7 @@ def fetch_fasta(id_list: List[str],
 
     pdb_ids = categorized_ids.get('pdb', [])
     if pdb_ids:
-        try:
-            if download_pdb_files:
-                download_pdb_files(pdb_ids, output_dir)
-            else:
-                for pid in pdb_ids:
-                    get_pdb(pid, output_dir)
-        except Exception as e:
-            print(f"❌ PDB fetch failed: {e}")
+        print(f"❌ The following IDs are PDB IDs: {''.join(pdb_ids)}. Please use fetch_structure function to download structures.")
 
     nucleotide_ids = categorized_ids.get('nucleotide', [])
     if nucleotide_ids:
@@ -66,29 +59,30 @@ def fetch_fasta(id_list: List[str],
     print("✅ Finished fetching all FASTA sequences.")
 
 
-def fetch_struct(id_list: List[str], output_dir: str):
+def fetch_structure(id_list: List[str], output_dir: str):
     """
-    Fetches PDB structures only, from a mixed list of IDs.
+    Fetches PDB structures using mixed list of PDB or UniProt IDs.
 
     Args:
-        id_list (List[str]): List of identifiers (can be mixed types).
-        output_dir (str): Path to the output directory for PDB files.
+        id_list (List[str]): List of PDB or UniProt identifiers.
+        output_dir (str): Directory to store fetched structures.
     """
     os.makedirs(output_dir, exist_ok=True)
     categorized_ids = deconv(id_list)
-    pdb_ids = categorized_ids.get('pdb', [])
+    pdb_ids = set(categorized_ids.get('pdb', []))
+
+    # Map UniProt → PDB
+    uniprot_ids = categorized_ids.get('uniprot', [])
+    for uid in uniprot_ids:
+        pdb_ids.update(_map_uniprot_to_pdb(uid))
 
     if not pdb_ids:
-        print("ℹ️ No valid PDB IDs found.")
+        print("ℹ️ No valid PDB IDs (direct or via UniProt) found.")
         return
 
-    print(f"➡️ Downloading PDB structures for: {' '.join(pdb_ids)}")
+    print(f"➡️ Downloading PDB structures for: {' '.join(sorted(pdb_ids))}")
     try:
-        if download_pdb_files:
-            download_pdb_files(pdb_ids, output_dir)
-        else:
-            for pid in pdb_ids:
-                get_pdb(pid, output_dir)
+        get_pdb(sorted(pdb_ids), output_dir)
     except Exception as e:
         print(f"❌ PDB fetch failed: {e}")
 
