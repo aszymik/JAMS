@@ -9,14 +9,14 @@ def _pdb_to_cif(pdb_path, cif_path):
     io.set_structure(structure)
     io.save(cif_path)
 
-def get_alphafold(uniprot_ids, output_dir='structures/', format='pdb'):
+def get_alphafold(uniprot_ids, output_dir="structures/", file_format="pdb"):
     """
     Downloads predicted structure(s) from AlphaFold DB.
 
     Args:
         uniprot_ids (str or list): UniProt ID or list of UniProt IDs (e.g., 'P12345' or ['P12345', 'Q9Y6K9']).
         output_dir (str): Directory to save the downloaded structure(s).
-        format (str): Desired output format: 'pdb' or 'cif'.
+        file_format (str): Desired output file_format: 'pdb' or 'cif'.
 
     Returns:
         list: List of paths to downloaded structure files (PDB or CIF).
@@ -30,7 +30,6 @@ def get_alphafold(uniprot_ids, output_dir='structures/', format='pdb'):
     for uniprot_id in uniprot_ids:
         pdb_url = f"https://alphafold.ebi.ac.uk/files/AF-{uniprot_id}-F1-model_v4.pdb"
         pdb_path = os.path.join(output_dir, f"{uniprot_id}_AF.pdb")
-        cif_path = os.path.join(output_dir, f"{uniprot_id}_AF.cif")
 
         try:
             response = requests.get(pdb_url)
@@ -39,13 +38,12 @@ def get_alphafold(uniprot_ids, output_dir='structures/', format='pdb'):
                     f.write(response.text)
                 print(f"✅ Downloaded AlphaFold PDB for {uniprot_id} to {pdb_path}")
 
-                if format == 'cif':
+                if file_format == 'cif':
+                    cif_path = os.path.join(output_dir, f"{uniprot_id}_AF.cif")
                     _pdb_to_cif(pdb_path, cif_path)
                     os.remove(pdb_path)
                     print(f"🔄 Converted to CIF and removed original PDB: {cif_path}")
-                    results.append(cif_path)
-                else:
-                    results.append(pdb_path)
+
             else:
                 print(f"❌ AlphaFold structure not found for UniProt ID: {uniprot_id}")
         except Exception as e:

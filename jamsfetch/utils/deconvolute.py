@@ -9,9 +9,9 @@ def deconv(id_list, verbose=True):
         id_list (list of str): A mixed list of biological identifiers.
 
     Returns:
-        dict: A dictionary with the keys 'uniprot', 'pdb', 'nucleotide', 'assembly', and 'unknown',
-              each containing a list of matching IDs. Also prints a warning for unrecognized IDs
-              and displays sorted identifiers by category.
+        dict: A dictionary with the keys 'uniprot', 'pdb', 'nucleotide', 'assembly', 'esm' and 
+              'unknown', each containing a list of matching IDs. Also prints a warning for 
+              unrecognized IDs and displays sorted identifiers by category.
     """
 
     result = {
@@ -19,6 +19,7 @@ def deconv(id_list, verbose=True):
         'pdb': [],
         'nucleotide': [],
         'assembly': [],
+        'esm': [],
         'unknown': []
     }
 
@@ -31,6 +32,8 @@ def deconv(id_list, verbose=True):
             result['assembly'].append(_id)
         elif re.fullmatch(r"(?:[A-Z]{2}_[0-9]+(?:\.[0-9]+)?)|(?:[A-Z]{1,2}[0-9]{5,6}(?:\.[0-9]+)?)", _id):
             result['nucleotide'].append(_id)
+        elif re.fullmatch(r"MGYP[0-9]{9,}", _id):
+            result['esm'].append(_id)
         else:
             result['unknown'].append(_id)
 
