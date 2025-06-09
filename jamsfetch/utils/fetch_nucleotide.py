@@ -20,7 +20,7 @@ def get_nucleotide(
         output_dir: Output directory
 
     Returns:
-        Path to the saved file
+        Path to the saved file if successful, else None
     """
     if isinstance(record_ids, str):
         record_ids = [record_ids]
@@ -34,8 +34,14 @@ def get_nucleotide(
         "email": email,
     }
 
-    r = requests.get(url, params=params)
-    r.raise_for_status()
+    try:
+        r = requests.get(url, params=params, timeout=10)
+        if not r.ok or not r.text.strip().startswith(">"):
+            print(f"Failed to fetch: {record_ids} (status={r.status_code})")
+            return None
+    except requests.RequestException as e:
+        print(f"Network error for {record_ids}: {e}")
+        return None
 
     os.makedirs(output_dir, exist_ok=True)
     ext = "fasta" if rettype == "fasta" else rettype
@@ -45,4 +51,5 @@ def get_nucleotide(
     with open(out_path, "w") as f:
         f.write(r.text)
 
+    print(f"Saved nucleotide data to {out_path}")
     return out_path

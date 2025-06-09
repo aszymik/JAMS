@@ -74,8 +74,11 @@ def _get_reports(
     assert response.status_code == 200, f"Unsuccessful connection, status code: {response.status_code}"
 
     metadata_json = response.json()
+    if 'reports' not in metadata_json:
+        print("No reports found in the response. Check if the organism or ID is valid.")
+        return []
+    return metadata_json['reports']
 
-    return  metadata_json['reports']
 
 
 def _get_ids(report):
