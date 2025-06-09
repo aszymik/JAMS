@@ -77,7 +77,18 @@ get_uniprot(
 ```
 
 ### ⛁ NCBI Nucleotide
+Download nucleotide sequences (e.g. mRNA, genomic fragments) using NCBI accession numbers:
+```python
+from jamsfetch.utils import get_nucleotide
 
+get_nucleotide(
+    record_ids=["NM_001200.2", "NM_000546.6"],  # single ID or list of IDs
+    output_dir="nucleotide_fasta/",            # output directory
+    email="your_email@example.com",            # required by NCBI E-utilities
+    rettype="fasta",                           # 'fasta' for sequence only, or 'gb' for GenBank format
+    retmode="text"                             # usually 'text'
+)
+```
 ### ⛁ NCBI Genome Assembly
 
 Download genomic or protein data for specific organisms or id(s):
