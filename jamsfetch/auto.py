@@ -88,13 +88,16 @@ def fetch_structure(id_list: List[str],
 
         # Map UniProt to PDB
         for uid in uniprot_ids:
-            pdb_ids.update(_map_uniprot_to_pdb(uid))
+            new_ids = _map_uniprot_to_pdb(uid)
+            if new_ids:
+                print(f"\nℹ️ {uid} mapped to the following PDB IDs: {', '.join(new_ids)}.")
+                pdb_ids.update(new_ids)
 
         if not pdb_ids:
-            print("ℹ️ No valid PDB IDs (direct or via UniProt) found.")
+            print("\nℹ️ No valid PDB IDs (direct or via UniProt) found.")
             return
 
-        print(f"➡️ Downloading PDB structures for: {', '.join(sorted(pdb_ids))}")
+        print(f"\nDownloading PDB structures for: {', '.join(sorted(pdb_ids))}")
         try:
             get_pdb(sorted(pdb_ids), output_dir, file_format)
         except Exception as e:
