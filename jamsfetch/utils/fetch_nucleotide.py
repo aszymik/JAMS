@@ -4,7 +4,7 @@ from typing import Union, List
 
 def get_nucleotide(
     record_ids: Union[str, List[str]],
-    email: str,
+    email: str = "",
     rettype: str = "fasta",
     retmode: str = "text",
     output_dir: str = "."
@@ -31,7 +31,7 @@ def get_nucleotide(
         "id": ",".join(record_ids),
         "rettype": rettype,
         "retmode": retmode,
-        "email": email
+        "email": email,
     }
 
     r = requests.get(url, params=params)
