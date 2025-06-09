@@ -51,8 +51,7 @@ from jamsfetch import fetch_structure
 ids = ["P12345", "1A2B"]
 fetch_structure(
     id_list=ids,
-    output_dir="downloads/",
-    assembly_data_type="genomic"  # or "protein"
+    output_dir="downloads/"
 )
 ```
 
