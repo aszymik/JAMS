@@ -1,4 +1,4 @@
-![](images/a593ba4d-f490-46ed-a3b3-f47b3dd46f13.png)
+![](images/logo.png)
 
 # 🧬 JAMS-Fetch
 
