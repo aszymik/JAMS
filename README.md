@@ -1,4 +1,4 @@
-<img src="images/obrazek.png" alt="" width="50%"/>
+<img src="images/logo.png" alt="" width="50%"/>
 
 # 🧬 JAMS-Fetch
 
