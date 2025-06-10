@@ -39,7 +39,7 @@ Use `fetch_fasta()` to automatically download sequences or structure files from 
 ```python
 from jamsfetch import fetch_fasta
 
-ids = ["P12345", "NM_001200.2", "GCF_000001405.39"]
+ids = ["P12345", "NM_001200.2", "GCF_000006945"]
 fetch_fasta(
     id_list=ids,
     output_dir="downloads/",
