@@ -1,4 +1,4 @@
-![](images/logo.png)
+<img src="images/obrazek.png" alt="" width="50%"/>
 
 # 🧬 JAMS-Fetch
 
