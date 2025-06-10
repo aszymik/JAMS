@@ -1,7 +1,8 @@
 <p align="center">
     <img src="images/logo.png" alt="" width="50%"/>
 </p>
-# 🧬 JAMS-Fetch
+
+🧬 JAMS-Fetch
 
 **JAMS-Fetch** (_Joint Automated Multi-source Sequence Fetcher_) is a Python package. It automates the retrieval of sequence and structure data from major bioinformatics databases using a unified, user-friendly interface.
 
